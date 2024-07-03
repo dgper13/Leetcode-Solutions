@@ -1,3 +1,3 @@
 SELECT product_name, year, price
-FROM sales
-LEFT JOIN product ON sales.product_id = product.product_id;
+FROM Sales
+LEFT JOIN Product ON Sales.product_id = Product.product_id;
