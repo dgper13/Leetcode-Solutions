@@ -1,3 +1,3 @@
 SELECT tweet_id
-FROM Tweets
+FROM tweets
 WHERE LENGTH(content) > 15;
