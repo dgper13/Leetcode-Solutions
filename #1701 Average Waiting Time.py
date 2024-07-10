@@ -1,7 +1,7 @@
 from typing import List
 
 class Solution:
-    def averageWaitingTime(self, clients: List[List[int]]) -> float:
+    def averageWaitingTime(self, customers: List[List[int]]) -> float:
         """
         Calculate the average waiting time for a list of clients.
 
@@ -19,7 +19,7 @@ class Solution:
         total_waiting_time = 0
         current_time = 0
 
-        for arrival_time, prep_time in clients:
+        for arrival_time, prep_time in customers:
             # Determine the actual start time for the current client
             actual_start_time = max(arrival_time, current_time)
 
@@ -36,4 +36,4 @@ class Solution:
             current_time = finish_time
             
         # Calculate and return the average waiting time
-        return total_waiting_time / len(clients)
+        return total_waiting_time / len(customers)
