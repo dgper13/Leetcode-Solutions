@@ -21,4 +21,4 @@ UNION
            COUNT(*) AS accounts_count
     FROM accounts
     WHERE income > 50000
-)
+);
