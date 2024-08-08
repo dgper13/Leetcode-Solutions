@@ -3,24 +3,29 @@ from typing import List
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
         """
-        Find all numbers from 1 to n that do not appear in the given list.
-
-        Given a list of integers where each integer is between 1 and n (inclusive), 
-        with some integers potentially missing, this method finds all the missing integers.
+        Finds the numbers that are missing from the list, where the list contains numbers
+        from 1 to n, but some numbers may be missing.
 
         Args:
-        nums (List[int]): A list of integers where each integer is between 1 and n.
+        nums (List[int]): A list of integers where each integer is in the range [1, n],
+                          with some numbers potentially missing.
 
         Returns:
-        List[int]: A list of integers that are missing from the given list.
+        List[int]: A list of missing numbers from 1 to n.
         """
-        results = []
-        # Create a set of the numbers in the list for O(1) lookups
-        nums_set = set(nums)
+        res = []
 
-        # Check for each number from 1 to n if it is missing in the set
-        for i in range(1, len(nums) + 1):
-            if i not in nums_set:
-                results.append(i)
+        # First pass: Mark the presence of each number in the array
+        for n in nums:
+            # Get the index to mark (abs(n) - 1)
+            to_mark = abs(n) - 1
+            # Mark the number by negating the value at the index
+            nums[to_mark] = - abs(nums[to_mark])
         
-        return results
+        # Second pass: Identify the missing numbers based on positive values
+        for i in range(len(nums)):
+            # If the value at index i is positive, then i + 1 is missing
+            if nums[i] > 0:
+                res.append(i + 1)
+
+        return res
