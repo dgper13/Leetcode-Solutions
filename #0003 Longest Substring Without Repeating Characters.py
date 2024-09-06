@@ -17,21 +17,22 @@ class Solution:
             return s_len
 
         i = 0  # Left pointer of the window
-        j = 1  # Right pointer of the window
-        
         max_len = 1  # Initialize the maximum length of the substring
         window = set(s[0])  # Initialize the set with the first character
 
-        while j < s_len:
-            if s[j] in window:
-                # If character at j is already in the set, remove character at i and move i forward
-                window.remove(s[i])
-                i += 1
+        # Iterate through the string with the right pointer `j`
+        for j in range(1, s_len):
+            next_letter = s[j]
+            
+            # If the character at `j` is not in the set, expand the window
+            if next_letter not in window:
+                window.add(next_letter)
+                max_len = max(max_len, j - i + 1)  # Update the max length
             else:
-                # If character at j is not in the set, add it and move j forward
-                window.add(s[j])
-                j += 1
-                # Update the maximum length found so far
-                max_len = max(max_len, j - i)
+                # If the character is a duplicate, shrink the window from the left
+                while s[i] != next_letter:
+                    window.remove(s[i])  # Remove characters until the duplicate is removed
+                    i += 1
+                i += 1  # Move past the duplicate character
         
         return max_len
